@@ -1,13 +1,9 @@
-import React from 'react';
-import Select from 'react-select';
 import { GlobalSvgSelector } from '../../assets/icons/global/GlobalSvgSelector';
 import { Item } from '../../pages/Home/components/ThisDayInfo/ThisDayInfo';
 import { ThisDayItem } from '../../pages/Home/components/ThisDayInfo/ThisDayItem';
 import s from './Popup.module.scss';
 
-interface Props {}
-
-export const Popup = ({}: Props) => {
+export const Popup = () => {
   const items = [
     {
       icon_id: 'temp',

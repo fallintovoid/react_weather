@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Card } from './Card';
 
 import s from './Days.module.scss';
@@ -16,7 +16,7 @@ export interface Day {
 }
 
 export const Days = (props: Props) => {
-  const days: Day[] = [
+  const days: Day[] = useMemo(() => [
     {
       day: 'Сегодня',
       day_info: '28 авг',
@@ -73,7 +73,8 @@ export const Days = (props: Props) => {
       temp_night: '+15',
       info: 'Облачно',
     },
-  ];
+  ], [])
+
   return (
     <>
       <Tabs />

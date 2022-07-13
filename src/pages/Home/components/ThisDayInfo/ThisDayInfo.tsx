@@ -1,10 +1,11 @@
-import React from 'react';
-import Select from 'react-select';
 import s from './ThisDayInfo.module.scss';
 import cloud from '../../../../assets/images/cloud.png';
 import { ThisDayItem } from './ThisDayItem';
+import { useEffect, useState } from 'react';
 
-interface Props {}
+interface Props {
+  currWeather: CurrentWeather
+}
 
 export interface Item {
   icon_id: string;
@@ -12,8 +13,9 @@ export interface Item {
   value: string;
 }
 
-export const ThisDayInfo = (props: Props) => {
-  const items = [
+export const ThisDayInfo = ({currWeather}: Props) => {
+  
+  const [items, setItems] = useState([
     {
       icon_id: 'temp',
       name: 'Температура',
@@ -34,7 +36,33 @@ export const ThisDayInfo = (props: Props) => {
       name: 'Ветер',
       value: '3 м/с юго-запад - легкий ветер',
     },
-  ];
+  ])
+
+  useEffect(() => {
+    setItems([
+      {
+        icon_id: 'temp',
+        name: 'Температура',
+        value: `${currWeather.temp}° - ощущается как ${currWeather.temp_feels_like}°`,
+      },
+      {
+        icon_id: 'pressure',
+        name: 'Давление',
+        value: `${currWeather.pressure} мм ртутного столба - нормальное`,
+      },
+      {
+        icon_id: 'precipitation',
+        name: 'Осадки',
+        value: 'Без осадков',
+      },
+      {
+        icon_id: 'wind',
+        name: 'Ветер',
+        value: `${currWeather.wind} м/с юго-запад - легкий ветер`
+      },
+    ])
+  }, [currWeather])
+
   return (
     <div className={s.this__day_info}>
       <div className={s.this__day_info_items}>
